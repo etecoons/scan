@@ -1,8 +1,9 @@
-//! Main Scan gameplay container component (Alpha-only minimal visor with timer).
+//! Main Scan gameplay container component (Alpha-only minimal visor with timer and localization).
 
 use crate::components::scan_board::ScanBoard;
 use crate::components::scan_logic::{BoardState, GameStatus, Sector};
 use crate::components::scan_overlay::ScanOverlay;
+use crate::i18n::LocaleContext;
 use gloo_timers::callback::Interval;
 use yew::prelude::*;
 
@@ -17,6 +18,7 @@ pub fn scan_game(props: &Props) -> Html {
     let flag_mode = use_state(|| false);
     let elapsed = use_state(|| 0u32);
     let interval_handle = use_mut_ref(|| None::<Interval>);
+    let locale = use_context::<LocaleContext>().expect("locale context");
 
     // Stop timer on component drop
     {
@@ -175,11 +177,11 @@ pub fn scan_game(props: &Props) -> Html {
                     </button>
                     { if board.status == GameStatus::Playing {
                         html! {
-                            <button onclick={restart_click} class="btn-reset">{"RESTART"}</button>
+                            <button onclick={restart_click} class="btn-reset">{ locale.t("restart") }</button>
                         }
                     } else if board.status == GameStatus::NotStarted {
                         html! {
-                            <button class="btn-reset-guide" disabled=true>{"CLICK GRID TO START"}</button>
+                            <button class="btn-reset-guide" disabled=true>{ locale.t("click_grid_to_start") }</button>
                         }
                     } else {
                         html! {}
@@ -187,11 +189,11 @@ pub fn scan_game(props: &Props) -> Html {
                 </div>
                 <div class="stats-counter">
                     <div class="beacons-counter">
-                        <span class="hud-label">{"BEACONS:"}</span>
+                        <span class="hud-label">{ format!("{}:", locale.t("beacons").to_uppercase()) }</span>
                         <span class="hud-value font-neon">{ remaining_beacons }</span>
                     </div>
                     <div class="timer-counter">
-                        <span class="hud-label">{"TIME:"}</span>
+                        <span class="hud-label">{ format!("{}:", locale.t("time").to_uppercase()) }</span>
                         <span class="hud-value font-neon">{ format!("{:.1}s", *elapsed as f64 / 10.0) }</span>
                     </div>
                 </div>

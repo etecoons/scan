@@ -23,6 +23,10 @@ pub fn translate(key: &str) -> Option<&'static str> {
         "no_scores" => Some("Рекордов пока нет."),
         "login_locked" => Some("Заблокировано. Попробуйте через 15 минут."),
         "login_prompt" => Some("Введите PIN-код для доступа"),
+        "beacons" => Some("МАЯКИ"),
+        "time" => Some("ВРЕМЯ"),
+        "restart" => Some("СБРОС"),
+        "click_grid_to_start" => Some("НАЖМИТЕ НА СЕТКУ"),
         _ => None,
     }
 }

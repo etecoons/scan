@@ -25,6 +25,10 @@ pub fn translate(key: &str) -> Option<&'static str> {
         "no_scores" => Some("No high scores yet."),
         "login_locked" => Some("Locked Out"),
         "login_prompt" => Some("Enter PIN"),
+        "beacons" => Some("BEACONS"),
+        "time" => Some("TIME"),
+        "restart" => Some("RESTART"),
+        "click_grid_to_start" => Some("CLICK GRID TO START"),
         _ => None,
     }
 }

@@ -23,6 +23,10 @@ pub fn translate(key: &str) -> Option<&'static str> {
         "no_scores" => Some("Sin puntuaciones aún."),
         "login_locked" => Some("Bloqueado. Vuelve a intentarlo en 15 minutes."),
         "login_prompt" => Some("Introduce el PIN de autenticación para acceder"),
+        "beacons" => Some("BALIZAS"),
+        "time" => Some("TIEMPO"),
+        "restart" => Some("REINICIAR"),
+        "click_grid_to_start" => Some("HAZ CLIC EN LA CUADRÍCULA"),
         _ => None,
     }
 }

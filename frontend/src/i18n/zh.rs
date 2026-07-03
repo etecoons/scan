@@ -23,6 +23,10 @@ pub fn translate(key: &str) -> Option<&'static str> {
         "no_scores" => Some("暂无记录。"),
         "login_locked" => Some("已锁定。请15分钟后重试。"),
         "login_prompt" => Some("输入身份验证密码以访问"),
+        "beacons" => Some("信标"),
+        "time" => Some("时间"),
+        "restart" => Some("重新开始"),
+        "click_grid_to_start" => Some("点击网格开始"),
         _ => None,
     }
 }

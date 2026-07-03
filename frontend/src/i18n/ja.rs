@@ -23,6 +23,10 @@ pub fn translate(key: &str) -> Option<&'static str> {
         "no_scores" => Some("まだスコアがありません。"),
         "login_locked" => Some("ロックされました。15分後に再試行してください。"),
         "login_prompt" => Some("認証用のPINを入力してください"),
+        "beacons" => Some("ビーコン"),
+        "time" => Some("時間"),
+        "restart" => Some("リスタート"),
+        "click_grid_to_start" => Some("グリッドをクリックしてスタート"),
         _ => None,
     }
 }
