@@ -7,7 +7,7 @@ Scan is a clean, secure, and optimized planetary hazard sector scanner (Mineswee
 ## 🏛️ Architecture & Stack
 *   **Frontend**: Yew (WASM)
 *   **Backend**: Axum (Rust) / Tokio
-*   **Deployment**: Nix-built Container / Unraid native / Docker Compose
+*   **Deployment**: UBI container (Red Hat UBI9) on Docker Hub / Unraid / Podman / Docker Compose
 
 ---
 
@@ -21,6 +21,25 @@ Scan is a clean, secure, and optimized planetary hazard sector scanner (Mineswee
 ---
 
 ## 💾 Deployment & Installation
+
+### Container images (Docker Hub)
+
+Images are **UBI9-minimal** based (Red Hat Universal Base Image). Tags:
+
+| Tag | Meaning |
+| :--- | :--- |
+| `latest` | Current recommended build |
+| `ubi` | Explicit UBI image (same lineage as `latest`) |
+| `0.2.3` | Immutable release pin |
+
+```bash
+# Pull examples
+podman pull docker.io/ubermetroid/scan:latest
+podman pull docker.io/ubermetroid/scan:ubi
+podman pull docker.io/ubermetroid/scan:0.2.3
+```
+
+Hub: [https://hub.docker.com/r/ubermetroid/scan](https://hub.docker.com/r/ubermetroid/scan)
 
 ### Docker Compose
 Create a `docker-compose.yml` file with the following service definition:
@@ -46,6 +65,24 @@ services:
       ENABLE_THEMES: ${ENABLE_THEMES:-true}
       ENABLE_PRINT: ${ENABLE_PRINT:-true}
       TZ: ${TZ:-UTC}
+```
+
+### Build the UBI image locally
+
+Requires [Podman](https://podman.io/) (or Docker) and network access to pull base images and crates.
+
+```bash
+# From the repository root
+podman build --format docker -f Containerfile.ubi \
+  -t docker.io/ubermetroid/scan:0.2.3 \
+  -t docker.io/ubermetroid/scan:latest \
+  -t docker.io/ubermetroid/scan:ubi \
+  .
+
+# Optional: push all three tags
+podman push docker.io/ubermetroid/scan:0.2.3
+podman push docker.io/ubermetroid/scan:latest
+podman push docker.io/ubermetroid/scan:ubi
 ```
 
 ---
