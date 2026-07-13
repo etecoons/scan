@@ -1,6 +1,6 @@
 # <img src="assets/icon.png" width="32" height="32" valign="middle"> Scan
 
-[![CI](https://github.com/etecoons/scan/actions/workflows/ci.yml/badge.svg)](https://github.com/etecoons/scan/actions/workflows/ci.yml)
+[![CI](https://github.com/dachoras/scan/actions/workflows/ci.yml/badge.svg)](https://github.com/dachoras/scan/actions/workflows/ci.yml)
 
 Planetary hazard sector scanner (Minesweeper clone).
 
