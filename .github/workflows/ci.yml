@@ -5,6 +5,11 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-and-test:
@@ -29,11 +34,22 @@ jobs:
         working-directory: frontend
         run: trunk build --release
 
+      - name: Cargo Format Check
+        run: cargo fmt --all -- --check
+
       - name: Cargo Check
         run: cargo check --workspace
 
+      - name: Cargo Clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
       - name: Cargo Test
         run: cargo test --workspace
+
+      - name: Cargo Deny Check
+        uses: EmbarkStudios/cargo-deny-action@v1
+        with:
+          command: check
 
   build-and-push-container:
     name: build-and-push-container
