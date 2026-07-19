@@ -121,6 +121,7 @@ ENV PORT=4503 \
     RUST_LOG=info \
     SCAN_DATA_DIR=/config
 
+
 EXPOSE 4503
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
